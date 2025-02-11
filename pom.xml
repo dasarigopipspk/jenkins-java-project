@@ -10,23 +10,28 @@
 
     <properties>
         <docker.image.prefix>kammana</docker.image.prefix>
-        <!-- Updated Java version to 17 for modern features -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <!-- Updated to the latest version of Bedrock Runtime -->
         <dependency>
             <groupId>com.oracle.bedrock</groupId>
             <artifactId>bedrock-runtime-maven</artifactId>
             <version>5.1.2</version>
         </dependency>
 
-        <!-- Updated to the latest version of JUnit Jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.11.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
             <version>5.11.2</version>
             <scope>test</scope>
         </dependency>
@@ -34,7 +39,6 @@
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin for Java 17 compatibility -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -45,14 +49,15 @@
                 </configuration>
             </plugin>
 
-            <!-- Maven Surefire Plugin for running tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                </configuration>
             </plugin>
 
-            <!-- Maven Deploy Plugin for deploying artifacts to Nexus -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -76,7 +81,7 @@
         <pluginRepository>
             <id>maven1</id>
             <name>Maven.org</name>
-            <url>http://repo1.maven.org/maven2</url>
+            <url>https://repo1.maven.org/maven2</url>
         </pluginRepository>
     </pluginRepositories>
 </project>
